@@ -1,7 +1,7 @@
 # fileAndProcessMonitor
 ## 功能
 
-1. 通过 `Windows` 的 `ReadDirectoryChangesW` 这个 `API` 监控目标目录下的文件变化，这里提供排除目录，指定文件前缀，文件后缀的功能。`ReadDirectoryChangesW` 这个 `api` 也是 `python` `的watchdog` 库实现 `windows` 文件监控的底层原理。
+1. 通过 `Windows` 的 `ReadDirectoryChangesW` 这个 `API` 监控目标目录下的文件变化，这里提供排除目录，指定文件前缀，文件后缀的功能。`ReadDirectoryChangesW` 这个 `api` 也是 `python` 的 `watchdog` 库实现 `windows` 文件监控的底层原理。
    
 2. 监测当前系统的进程启动和退出情况，不足的是这里是通过获取当前系统的进程列表，和之前的进程列表对比实现的。而不是 `hook` 进程启动（实在不会），因此这里无法监测到瞬间就运行完毕了的进程。`python` 的 `WMI` 库也是通过循环不断对比进程列表实现的监测进程。
 
@@ -10,7 +10,7 @@
 
 ## 有待完善的地方
 
-1. 通过 `hook` 系统函数，实现真正的实时监控进程的瞬时启动，从而瞬间结束的进程也可以监测到。据说 `Windows` 的进程启动都会经过 `OpenProcess` 这个函数，因此我们可以监测这个函数的调用。但是我不会。
+1. 通过 `hook` 系统函数，实现真正的实时监控进程的瞬时启动，从而瞬间结束的进程也可以监测到。据说 `Windows` 的进程启动都会经过 `OpenProcess` 这个函数，因此我们可以监测这个函数的调用来监测进程的启动。但是我不会。
 
 2. `NtQuerySystemInformation` 只能得到部分句柄，系统的进程句柄无法获取到，还有进程的部分句柄也获取不到，但是这里普通进程的文件句柄是获取的齐全的。最好还是可以获取到系统进程的文件句柄。
 
